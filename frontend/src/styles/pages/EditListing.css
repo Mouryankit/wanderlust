@@ -1,0 +1,111 @@
+/* Reusing and adapting logic from NewListing.css */
+
+.el-container {
+  min-height: 100vh;
+  background: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.el-form-wrapper {
+  background: white;
+  padding: 40px;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.el-form-wrapper h1 {
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 28px;
+  color: #222222;
+}
+
+.el-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #484848;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.el-input,
+.el-textarea,
+.el-select {
+  padding: 12px;
+  border: 1px solid #b0b0b0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.el-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.el-input:focus,
+.el-textarea:focus,
+.el-select:focus {
+  border-color: #222222;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(34, 34, 34, 0.1);
+}
+
+.el-submit-btn {
+  padding: 14px;
+  background: #ff385c;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.el-submit-btn:hover {
+  background: #e03150;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .el-form-wrapper {
+    padding: 25px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

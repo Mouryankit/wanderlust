@@ -1,0 +1,76 @@
+/* Page layout */
+.nl-container {
+  min-height: 100vh;
+  background: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form wrapper */
+.nl-form-wrapper {
+  background: white;
+  padding: 30px;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Heading */
+.nl-form-wrapper h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form */
+.nl-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Inputs, Textarea, Select */
+.nl-input,
+.nl-textarea,
+.nl-select {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.2s;
+  width: 100%;
+  /* Ensure full width inside the form */
+  box-sizing: border-box;
+}
+
+/* Focus effect */
+.nl-input:focus,
+.nl-textarea:focus,
+.nl-select:focus {
+  border-color: #ff385c;
+  outline: none;
+}
+
+/* Button */
+.nl-submit-btn {
+  padding: 12px;
+  background: #ff385c;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nl-submit-btn:hover {
+  background: #e03150;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .nl-form-wrapper {
+    padding: 20px;
+  }
+}

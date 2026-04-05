@@ -1,0 +1,116 @@
+/* Auth pages - shared styles for Login & Signup */
+
+.auth-page {
+  min-height: 70vh;
+  /* Reduced from 100vh to fit within remaining screen space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 40px;
+  background: var(--color-bg);
+
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-10);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.auth-form h2 {
+  margin: 0 0 var(--space-2) 0;
+  font-size: 1.375rem;
+  /* 22px */
+  font-weight: 600;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.auth-form p {
+  margin: 0 0 var(--space-4) 0;
+  font-size: 0.875rem;
+  /* 14px */
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.auth-form input {
+  width: 100%;
+  height: var(--control-height);
+  padding: 0 var(--space-4);
+  font-size: 1rem;
+  /* 16px */
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.auth-form input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--ring-primary);
+}
+
+.auth-form button {
+  width: 100%;
+  height: var(--control-height);
+  padding: 0 var(--space-4);
+  font-size: 1rem;
+  /* 16px */
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-primary);
+  border: 0;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.auth-form button:hover {
+  transform: translateY(-2px);
+  background: var(--color-primary-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.auth-form button:active {
+  transform: translateY(0);
+}
+
+.auth-link {
+  margin-top: var(--space-2);
+  text-align: center;
+}
+
+.auth-link a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.auth-link a:hover {
+  color: var(--color-primary-hover);
+}
+
+.auth-link span {
+  color: var(--color-text-muted);
+  margin-right: var(--space-1);
+}

@@ -1,0 +1,190 @@
+.listing-detail-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  color: #222222;
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+/* Header & Title */
+.listing-detail-title {
+  font-weight: 700;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+/* Image */
+.listing-detail-image-box {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: #f0f0f0;
+}
+
+.listing-detail-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.listing-detail-image:hover {
+  transform: scale(1.02);
+}
+
+/* Info Bar */
+.listing-detail-info {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eeeeee;
+  color: #484848;
+  font-size: 16px;
+}
+
+.listing-detail-info p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.listing-detail-info strong {
+  color: #222222;
+  font-weight: 600;
+}
+
+/* Price */
+.listing-detail-price {
+  margin-bottom: 40px;
+}
+
+.listing-detail-price h2 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #222222;
+  margin: 0;
+}
+
+/* Description */
+.listing-detail-description {
+  margin-bottom: 48px;
+}
+
+.listing-detail-description h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #222222;
+}
+
+.listing-detail-description p {
+  font-size: 17px;
+  color: #222222;
+  white-space: pre-line;
+  opacity: 0.9;
+}
+
+/* Owner Section */
+.listing-detail-owner {
+  background: #e6e4e4;
+  padding: 32px;
+  border-radius: 20px;
+  margin-bottom: 48px;
+  border: 1px solid #eeeeee;
+  transition: 0.3s;
+}
+
+.listing-detail-owner:hover {
+  background: #f2f2f2;
+}
+
+.listing-detail-owner h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #717171;
+  margin: 0 0 8px 0;
+}
+
+.listing-detail-owner p {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222222;
+  margin: 0;
+}
+
+/* Owner Controls */
+.listing-detail-controls {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.edit-btn,
+.delete-btn {
+  flex: 1;
+  text-decoration: none;
+  text-align: center;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.edit-btn {
+  background: #222222;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.delete-btn {
+  background: white;
+  color: #ff385c;
+  border: 2px solid #ff385c;
+}
+
+.delete-btn:hover {
+  background: #fff1f4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 56, 92, 0.1);
+}
+
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  font-size: 20px;
+  font-weight: 600;
+  color: #717171;
+}
+
+@media (max-width: 600px) {
+  .listing-detail-container {
+    padding: 24px 20px;
+  }
+
+
+  .listing-detail-info {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .listing-detail-controls {
+    flex-direction: column;
+  }
+}

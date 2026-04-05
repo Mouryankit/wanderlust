@@ -1,0 +1,426 @@
+.filter-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  /* Higher than navbar */
+  animation: fadeIn 0.3s ease;
+}
+
+.filter-modal-content {
+  background: white;
+  width: 100%;
+  max-width: 780px;
+  height: 90vh;
+  max-height: 800px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  position: relative;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes mobileSlideUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.filter-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid #ebebeb;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background 0.2s;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #222222;
+}
+
+.close-btn:hover {
+  background: #f7f7f7;
+}
+
+.filter-modal-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: #222222;
+}
+
+/* Body */
+.filter-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filter-section {
+  margin-bottom: 32px;
+}
+
+.filter-section:last-child {
+  margin-bottom: 0;
+}
+
+.filter-section h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222222;
+  margin: 0 0 4px 0;
+}
+
+.filter-subtitle {
+  font-size: 14px;
+  color: #717171;
+  margin: 0 0 24px 0;
+}
+
+.filter-divider {
+  height: 1px;
+  background: #ebebeb;
+  margin: 32px 0;
+}
+
+/* Price Inputs */
+.price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.price-input-wrapper {
+  flex: 1;
+  border: 1px solid #b0b0b0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  transition: border-color 0.2s;
+}
+
+.price-input-wrapper:focus-within {
+  border-color: #222222;
+  box-shadow: 0 0 0 1px #222222;
+}
+
+.price-input-wrapper label {
+  font-size: 12px;
+  color: #717171;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.price-input-box {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #222222;
+}
+
+.price-input-box span {
+  margin-right: 4px;
+}
+
+.price-input-box input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  width: 100%;
+  font-family: inherit;
+  color: #222222;
+  background: transparent;
+}
+
+/* Remove arrows from number input */
+.price-input-box input::-webkit-outer-spin-button,
+.price-input-box input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.price-dash {
+  color: #dddddd;
+  font-size: 18px;
+}
+
+/* Checkboxes */
+.type-options {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.type-checkbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox-text h5 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #222222;
+}
+
+.checkbox-text p {
+  margin: 0;
+  font-size: 14px;
+  color: #717171;
+  max-width: 85%;
+  line-height: 1.4;
+}
+
+.type-checkbox input {
+  display: none;
+}
+
+.checkmark {
+  height: 24px;
+  width: 24px;
+  background-color: white;
+  border: 1px solid #b0b0b0;
+  border-radius: 4px;
+  position: relative;
+  flex-shrink: 0;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.type-checkbox:hover .checkmark {
+  border-color: #222222;
+}
+
+.type-checkbox input:checked~.checkmark {
+  background-color: #222222;
+  border-color: #222222;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.type-checkbox input:checked~.checkmark:after {
+  display: block;
+}
+
+.type-checkbox .checkmark:after {
+  left: 8px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Counters */
+.rooms-counters {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.counter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  color: #222222;
+}
+
+.counter-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.counter-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #b0b0b0;
+  background: white;
+  color: #717171;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.counter-btn:hover:not(:disabled) {
+  border-color: #222222;
+  color: #222222;
+}
+
+.counter-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.counter-val {
+  min-width: 20px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+/* Footer */
+.filter-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-top: 1px solid #ebebeb;
+  background: white;
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+}
+
+.clear-all-btn {
+  background: transparent;
+  border: none;
+  text-decoration: underline;
+  font-size: 16px;
+  font-weight: 600;
+  color: #222222;
+  cursor: pointer;
+  padding: 8px 12px;
+  margin-left: -12px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.clear-all-btn:hover {
+  background: #f7f7f7;
+}
+
+.show-places-btn {
+  background: #222222;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.2s;
+}
+
+.show-places-btn:hover {
+  background: #000000;
+}
+
+.show-places-btn:active {
+  transform: scale(0.96);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .filter-modal-overlay {
+    align-items: flex-end;
+  }
+
+  .filter-modal-content {
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    animation: mobileSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .filter-modal-header h3 {
+    font-size: 18px;
+  }
+
+  .filter-modal-body {
+    padding: 24px 20px 100px 20px;
+    /* Extra padding for sticky footer */
+  }
+
+  .filter-section h4 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .price-inputs {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .price-dash {
+    display: none;
+  }
+
+  .checkbox-text p {
+    max-width: 100%;
+    font-size: 13px;
+  }
+
+  .filter-modal-footer {
+    padding: 16px 20px;
+  }
+
+  .show-places-btn {
+    width: 60%;
+    text-align: center;
+  }
+}

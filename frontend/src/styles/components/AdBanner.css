@@ -1,0 +1,123 @@
+.normal-ad-banner {
+  display: flex;
+  align-items: center;
+  background: #f7f7f7;
+  border-radius: 20px;
+  margin: 40px 0;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.ad-banner-content {
+  flex: 1;
+  padding: 48px 64px;
+}
+
+.ad-banner-content h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #222222;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.5px;
+}
+
+.ad-banner-content p {
+  font-size: 18px;
+  color: #717171;
+  margin: 0 0 24px 0;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+.ad-banner-btn {
+  display: inline-block;
+  background: #222222;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.ad-banner-btn:hover {
+  background: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ad-banner-image-container {
+  flex: 1.2;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  min-height: 280px;
+  display: flex;
+  /* Make container flex so inner track takes full height */
+}
+
+.ad-banner-scrolling-images {
+  display: flex;
+  height: 100%;
+  width: max-content;
+  animation: adBannerScroll 20s linear infinite;
+}
+
+.ad-banner-scrolling-images:hover {
+  animation-play-state: paused;
+}
+
+.ad-banner-scrolling-images img {
+  height: 100%;
+  width: 300px;
+  object-fit: cover;
+  border-left: 4px solid white;
+}
+
+@keyframes adBannerScroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 950px) {
+  .ad-banner-content {
+    padding: 32px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .normal-ad-banner {
+    flex-direction: column;
+  }
+
+  .ad-banner-image-container {
+    width: 100%;
+    min-height: 200px;
+  }
+}
+
+@media (max-width: 550px) {
+  .ad-banner-content {
+    padding: 32px 24px;
+  }
+
+  .ad-banner-content h2 {
+    font-size: 28px;
+  }
+
+  .ad-banner-content p {
+    font-size: 16px;
+  }
+
+  .ad-banner-btn {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+}

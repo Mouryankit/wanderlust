@@ -1,0 +1,23 @@
+/* Owner Dashboard Section for Listing Details */
+.owner-dashboard {
+  margin-top: 80px;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #eeeeee;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #222222;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+.dashboard-hr {
+  border: none;
+  border-top: 1px solid #eeeeee;
+  margin-bottom: 40px;
+}

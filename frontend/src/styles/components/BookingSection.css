@@ -1,0 +1,244 @@
+/* Booking Section Styles for Listing Details */
+.booking-box {
+  margin-top: 60px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #ebebeb;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 100px; /* Adjust based on navbar height */
+}
+
+.booking-box h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+.booking-inputs {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #b0b0b0;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.input-row {
+  display: flex;
+  border-bottom: 1px solid #b0b0b0;
+}
+
+.input-group {
+  flex: 1;
+  padding: 12px;
+}
+
+/* 
+.input-group:not(:last-child) {
+  border-right: 1px solid #b0b0b0;
+} */
+
+.input-group label {
+  display: block;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #222222;
+  margin-bottom: 4px;
+}
+
+.input-group input {
+  width: 100%;
+  border: none;
+  font-size: 14px;
+  color: #717171;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.input-group input:focus {
+  color: #222222;
+}
+
+.book-btn {
+  width: 100%;
+  background: linear-gradient(to right, #E61E4D 0%, #E31C5F 50%, #D70466 100%);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+  margin-bottom: 8px;
+}
+
+.book-btn:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+.book-btn:active {
+  transform: scale(0.98);
+}
+
+.book-btn:disabled {
+  background: #dddddd;
+  cursor: not-allowed;
+  transform: none;
+  opacity: 1;
+}
+
+/* User Booking Status Card */
+.user-booking-info {
+  text-align: left;
+}
+
+.booking-status-card {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #ebebeb;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.booking-status-card p {
+  margin: 12px 0;
+  font-size: 15px;
+  color: #222222;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.booking-status-card strong {
+  font-weight: 600;
+  color: #717171;
+}
+
+.status-label {
+    text-transform: capitalize;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.status-confirmed {
+  background: #e6f7f4;
+  color: #008489;
+  font-weight: 700;
+}
+
+.status-cancelled {
+  background: #fff1f4;
+  color: #ff385c;
+  font-weight: 700;
+}
+
+.cancel-btn {
+  width: 100%;
+  margin-top: 16px;
+  background: #ffffff;
+  color: #222222;
+  border: 1px solid #222222;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.cancel-btn:hover {
+  background: #f7f7f7;
+}
+
+/* Price Breakdown */
+.price-breakdown {
+  margin: 16px 0;
+  color: #222222;
+}
+
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: underline;
+  font-size: 15px;
+  color: #484848;
+  margin-bottom: 8px;
+}
+
+.price-breakdown hr {
+  border: 0;
+  border-top: 1px solid #ebebeb;
+  margin: 12px 0;
+}
+
+.total-price-footer {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 800;
+  font-size: 17px;
+  color: #222222;
+}
+
+/* User Bookings List */
+.bookings-separator {
+  margin: 32px 0 24px 0;
+  border: 0;
+  border-top: 1px solid #ebebeb;
+}
+
+.user-bookings-list h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.bookings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.booking-status-card.mini {
+  padding: 16px;
+  background: #fcfcfc;
+  border: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.booking-summary p {
+  margin: 2px 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.cancel-btn.mini {
+  margin-top: 0;
+  width: auto;
+  padding: 6px 12px;
+  font-size: 12px;
+  border: 1px solid #dddddd;
+}
+
+.cancel-btn.mini:hover {
+  background: #fff1f4;
+  color: #ff385c;
+  border-color: #ff385c;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .booking-box {
+        position: static;
+        margin-top: 32px;
+    }
+}
