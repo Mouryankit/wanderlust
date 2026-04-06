@@ -16,9 +16,8 @@ const app = express();
 connectDB();
 
 // middleware
-// app.use(cors());
 app.use(cors({
-  origin: "*", // later replace with frontend URL
+  origin: process.env.FRONTEND_URL,
 }));
 app.use(express.json());
 
