@@ -19,7 +19,7 @@ connectDB();
 
 // app.use(cors()); // for localhost 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:5173", // Use env variable or fallback
+  origin: [process.env.FRONTEND_URL, "http://localhost:5173", "http://localhost:5174"].filter(Boolean),
   credentials: true,
 }));
 
@@ -35,8 +35,8 @@ app.use("/api/profile", profileRoutes);
 // error handling middleware (should be last middleware)
 app.use(errorHandler);
 
-app.get("/*", (req, res) => {
-  res.send("Wanderlust API Running ");
+app.use((req, res) => {
+  res.status(404).send("Route not found");
 });
 
 const PORT = process.env.PORT || 5000;
