@@ -9,7 +9,7 @@ const Navbar = () => {
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [rooms, setRooms] = useState(1);
+  const [rooms, setRooms] = useState("");
 
   const today = new Date().toISOString().split("T")[0];
 
@@ -77,7 +77,7 @@ const Navbar = () => {
             <label>Where</label>
             <input
               type="text"
-              placeholder="Search destinations"
+              placeholder="Destination"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
             />
@@ -89,7 +89,15 @@ const Navbar = () => {
             <label>Check in</label>
             <div className="date-input">
               <input
-                type="date"
+                type={startDate ? "date" : "text"}
+                placeholder="Add dates"
+                onFocus={(e) => {
+                  e.target.type = "date";
+                  try { e.target.showPicker(); } catch (err) { }
+                }}
+                onBlur={(e) => {
+                  if (!e.target.value) e.target.type = "text";
+                }}
                 min={today}
                 value={startDate}
                 onChange={handleStartDateChange}
@@ -103,7 +111,15 @@ const Navbar = () => {
             <label>Check out</label>
             <div className="date-input">
               <input
-                type="date"
+                type={endDate ? "date" : "text"}
+                placeholder="Add dates"
+                onFocus={(e) => {
+                  e.target.type = "date";
+                  try { e.target.showPicker(); } catch (err) { }
+                }}
+                onBlur={(e) => {
+                  if (!e.target.value) e.target.type = "text";
+                }}
                 min={startDate || today}
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}

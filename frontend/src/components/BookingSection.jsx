@@ -9,8 +9,8 @@ const BookingSection = ({ listingId, currentUser, isOwner, price, onBookingChang
   // Booking states
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
-  const [guests, setGuests] = useState(1);
-  const [rooms, setRooms] = useState(1);
+  const [guests, setGuests] = useState("");
+  const [rooms, setRooms] = useState("");
   const [bookingLoading, setBookingLoading] = useState(false);
   const [userBookings, setUserBookings] = useState([]);
 
@@ -21,9 +21,9 @@ const BookingSection = ({ listingId, currentUser, isOwner, price, onBookingChang
     const end = new Date(checkOut);
     const timeDiff = end - start;
     const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    
+
     if (days <= 0) return { days: 0, total: 0 };
-    
+
     const total = days * price * rooms;
     return { days, total };
   };
@@ -56,8 +56,8 @@ const BookingSection = ({ listingId, currentUser, isOwner, price, onBookingChang
       return;
     }
 
-    if (days <= 0) {
-      alert("Please select valid check-in and check-out dates");
+    if (days <= 0 || !rooms || !guests) {
+      alert("Please fill in all booking details including dates, guests, and rooms");
       return;
     }
 
@@ -85,8 +85,8 @@ const BookingSection = ({ listingId, currentUser, isOwner, price, onBookingChang
       // Reset dates
       setCheckIn("");
       setCheckOut("");
-      setGuests(1);
-      setRooms(1);
+      setGuests("");
+      setRooms("");
 
       // Refresh to show booking status
       if (onBookingChange) onBookingChange();
@@ -133,7 +133,15 @@ const BookingSection = ({ listingId, currentUser, isOwner, price, onBookingChang
             <div className="input-group date-input">
               <label>Check-in</label>
               <input
-                type="date"
+                type={checkIn ? "date" : "text"}
+                placeholder="Check-in-date"
+                onFocus={(e) => {
+                  e.target.type = "date";
+                  try { e.target.showPicker(); } catch (err) { }
+                }}
+                onBlur={(e) => {
+                  if (!e.target.value) e.target.type = "text";
+                }}
                 value={checkIn}
                 onChange={(e) => setCheckIn(e.target.value)}
                 min={new Date().toISOString().split("T")[0]}
@@ -142,7 +150,15 @@ const BookingSection = ({ listingId, currentUser, isOwner, price, onBookingChang
             <div className="input-group date-input">
               <label>Check-out</label>
               <input
-                type="date"
+                type={checkOut ? "date" : "text"}
+                placeholder="check-out-date"
+                onFocus={(e) => {
+                  e.target.type = "date";
+                  try { e.target.showPicker(); } catch (err) { }
+                }}
+                onBlur={(e) => {
+                  if (!e.target.value) e.target.type = "text";
+                }}
                 value={checkOut}
                 onChange={(e) => setCheckOut(e.target.value)}
                 min={checkIn || new Date().toISOString().split("T")[0]}
@@ -154,6 +170,7 @@ const BookingSection = ({ listingId, currentUser, isOwner, price, onBookingChang
               <label>Guests</label>
               <input
                 type="number"
+                placeholder="guests"
                 value={guests}
                 onChange={(e) => setGuests(e.target.value)}
                 min="1"
@@ -164,6 +181,7 @@ const BookingSection = ({ listingId, currentUser, isOwner, price, onBookingChang
               <label>Rooms</label>
               <input
                 type="number"
+                placeholder="Rooms"
                 value={rooms}
                 onChange={(e) => setRooms(e.target.value)}
                 min="1"
@@ -173,7 +191,7 @@ const BookingSection = ({ listingId, currentUser, isOwner, price, onBookingChang
           </div>
         </div>
 
-        {days > 0 && (
+        {days > 0 && rooms > 0 && (
           <div className="price-breakdown">
             <div className="price-item">
               <span>₹{price} x {days} nights x {rooms} {rooms === 1 ? 'room' : 'rooms'}</span>
