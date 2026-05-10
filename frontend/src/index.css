@@ -1,6 +1,73 @@
-@import "./styles/tokens.css";
-@import "./styles/base.css";
+/* Design tokens */
+/* :root {
+  --color-primary: #e54141;
+  --color-primary-hover: #023e8a;
+  --color-primary-soft: #caf0f8;
+  --color-text: #1e293b;
+  --color-text-muted: #64748b;
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-danger: #ef4444;
+} */
 
-/* Put small global tweaks here (keep token-driven). */
+:root {
+  --color-primary: #e54141;
+  /* Vibrant red for CTAs, accents – evokes passion/adventure */
+  --color-primary-hover: #e76f51;
+  /* Warm terracotta hover – sunset/energy without blue */
+  --color-primary-soft: #f4a261;
+  /* Sunny peach soft – warm highlights, travel optimism */
+  --color-text: #242433;
+  /* Dark slate – readable headers/body */
+  --color-text-muted: #64748b;
+  /* Muted gray – subtitles, secondary info */
+  --color-bg: #f8fafc;
+  /* Light gray – clean page background */
+  --color-surface: #ffffff;
+  /* Pure white – cards, modals */
+  --color-border: #d7dce3;
+  /* Soft border – dividers, inputs */
+  --color-danger: #ef4444;
+  /* Alert red – errors, warnings */
+}
 
+/* Global base styles */
+html,
+body {
+  height: 100%;
+}
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}

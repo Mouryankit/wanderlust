@@ -1,5 +1,6 @@
 /* Main Listing Grid Styles */
 .listing-grid {
+  margin: 30px 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 32px 24px;
@@ -8,10 +9,10 @@
 .empty-listings {
   text-align: center;
   padding: 80px 20px;
-  background: #fcfcfc;
+  background: var(--color-bg);
   border-radius: 24px;
   border: 1px dashed #e0e0e0;
-  color: #717171;
+  color: var(--color-text-muted);
   font-weight: 500;
   grid-column: 1 / -1;
 }

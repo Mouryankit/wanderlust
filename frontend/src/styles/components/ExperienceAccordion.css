@@ -14,14 +14,14 @@
 .bottom-ad-header h2 {
   font-size: 36px;
   font-weight: 700;
-  color: #222222;
+  color: var(--color-text);
   margin: 0 0 8px 0;
   letter-spacing: -0.5px;
 }
 
 .bottom-ad-header p {
   font-size: 18px;
-  color: #717171;
+  color: var(--color-text-muted);
   margin: 0;
 }
 
@@ -92,8 +92,8 @@
 
 .accordion-content a {
   display: inline-block;
-  background: white;
-  color: #222222;
+  background: var(--color-surface);
+  color: var(--color-text);
   padding: 12px 28px;
   border-radius: 30px;
   text-decoration: none;
@@ -103,7 +103,7 @@
 }
 
 .accordion-content a:hover {
-  background: #f7f7f7;
+  background: var(--color-bg);
   transform: translateY(-2px);
 }
 

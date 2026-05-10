@@ -1,154 +1,138 @@
 .review-form-container,
 .reviews-list-container {
   margin-top: 40px;
-  padding-top: 30px;
-  border-top: 1px solid #dddddd;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-.review-form-container h3,
-.reviews-list-container h3 {
+.review-form-container {
+  margin-bottom: 50px;
+}
+
+.section-header {
   font-size: 20px;
-  margin-bottom: 20px;
-  font-weight: 600;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.empty-message {
+  padding: 4rem;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--color-text-muted);
 }
 
 /* Review Form */
 .review-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  max-width: 500px;
+  gap: 16px;
+  max-width: 600px;
 }
 
-.rating-input .star-rating {
+.rating-select {
   font-size: 24px;
-  color: #dddddd;
-  cursor: pointer;
+  color: var(--color-border);
   display: flex;
-  gap: 5px;
+  gap: 4px;
+  cursor: pointer;
 }
 
-.star.active {
-  color: #ff385c;
+.star-select.active {
+  color: var(--color-primary);
 }
 
-.comment-input label {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.comment-input textarea {
+.review-form textarea {
   width: 100%;
   min-height: 100px;
   padding: 12px;
-  border: 1px solid #b0b0b0;
-  border-radius: 8px;
-  font-size: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  font-size: 15px;
   resize: vertical;
-  font-family: inherit;
 }
 
 .submit-review-btn {
   align-self: flex-start;
-  padding: 12px 24px;
-  background: #222222;
+  padding: 10px 24px;
+  background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
-}
-
-.submit-review-btn:hover {
-  background: #000000;
-}
-
-.review-auth-prompt {
-  background: #f7f7f7;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  color: #717171;
 }
 
 /* Reviews List */
 .reviews-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
 }
 
-.review-item-card {
-  padding: 24px;
-  background-color: #ffffff;
-  border: 1px solid #ebebeb;
+.review-card {
+  padding: 20px;
+  border: 1px solid var(--color-border);
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-}
-
-.review-item-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  gap: 12px;
 }
 
 .review-header {
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
 }
 
 .author-name {
   font-weight: 700;
-  font-size: 16px;
-  color: #222222;
-  margin-bottom: 2px;
+  font-size: 15px;
 }
 
 .review-date {
-  font-size: 13px;
-  color: #888888;
+  font-size: 12px;
+  color: var(--color-text-muted);
 }
 
-.review-rating-stars {
-  color: #ff385c;
-  font-size: 15px;
-  letter-spacing: 2px;
+.rating-display {
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.review-text {
+.star-icon {
+  color: var(--color-primary);
   font-size: 16px;
-  line-height: 1.6;
-  color: #484848;
-  margin: 0;
-  word-wrap: break-word;
 }
 
-.delete-review-link {
-  align-self: flex-start;
+.review-comment {
+  font-size: 15px;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  text-align: justify;
+}
+
+.delete-review-btn {
+  align-self: flex-end;
   background: none;
   border: none;
-  color: #ff385c;
-  font-size: 13px;
+  color: var(--color-primary);
+  font-size: 12px;
   font-weight: 600;
-  padding: 0;
   cursor: pointer;
   text-decoration: underline;
-  margin-top: 5px;
-}
-
-.delete-review-link:hover {
-  color: #e31c5f;
 }
 
 .no-reviews {
-  color: #717171;
-  font-style: italic;
+  color: var(--color-text-muted);
+  font-size: 15px;
 }

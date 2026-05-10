@@ -156,7 +156,7 @@ exports.googleLogin = async (req, res) => {
   //   });
   // }
   catch (error) {
-    console.log("GOOGLE ERROR:", error);
+    // console.log("GOOGLE ERROR:", error);
     res.status(401).json({
       message: "Google login failed",
       error: error.message

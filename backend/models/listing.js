@@ -37,19 +37,8 @@ const listingSchema = new Schema({
         min: 0
     }, //per room
     location: {
-        name: String, // "Manali, Himachal"
-        // add in future: geometry for map integration
-        // geometry: {
-        //     type: {
-        //         type: String,
-        //         enum: ["Point"],
-        //         required: true
-        //     },
-        //         coordinates: {
-        //         type: [Number],
-        //         required: true
-        //     }
-        // }
+        type: String,
+        required: true,
     },
     country: String,
     reviews: [{
@@ -69,6 +58,10 @@ const listingSchema = new Schema({
         type: Number,
         required: true,
         min: 1
+    },
+    contactNo: {
+        type: String,
+        required: true,
     }
 }, { timestamps: true });
 

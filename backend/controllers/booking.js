@@ -6,7 +6,8 @@ const wrapAsync = require("../utils/wrapAsync");
 // Get all bookings for a listing
 exports.index = wrapAsync(async (req, res) => {
   const { id } = req.params;
-  const bookings = await Booking.find({ listing: id }).populate("user");
+  const bookings = await Booking.find({ listing: id }).populate("user", "username _id");
+  // console.log(bookings);
   res.status(200).json(bookings);
 });
 
@@ -14,59 +15,9 @@ exports.index = wrapAsync(async (req, res) => {
 exports.createBooking = wrapAsync(async (req, res) => {
   const { id } = req.params; // listing id
   const { checkIn, checkOut, guests, rooms } = req.body;
+  const { totalPrice } = req.bookingData;
 
-  const listing = await Listing.findById(id);
-
-  if (!listing) {
-    throw new ApiError(404, "Listing not found");
-  }
-
-  // 0. Prevent owner from booking their own listing
-  if (listing.owner.toString() === req.user.id) {
-    throw new ApiError(400, "You cannot book your own listing");
-  }
-
-  // 1. Check Availability (Overbooking check with Overlapping Ranges)
-  // Fetch all confirmed bookings for this listing that overlap with the requested range
-  const overlappingBookings = await Booking.find({
-    listing: id,
-    status: "confirmed",
-    $or: [
-      { checkIn: { $lt: new Date(checkOut) }, checkOut: { $gt: new Date(checkIn) } }
-    ]
-  });
-
-  // Calculate peak occupancy for each day in the requested range
-  const start = new Date(checkIn);
-  const end = new Date(checkOut);
-  
-  for (let d = new Date(start); d < end; d.setDate(d.getDate() + 1)) {
-    let roomsOccupiedOnThisDay = 0;
-    
-    overlappingBookings.forEach(b => {
-      const bStart = new Date(b.checkIn);
-      const bEnd = new Date(b.checkOut);
-      // Check if this date 'd' falls within booking 'b' range [bStart, bEnd)
-      if (d >= bStart && d < bEnd) {
-        roomsOccupiedOnThisDay += (b.rooms || 1);
-      }
-    });
-
-    if (roomsOccupiedOnThisDay + rooms > listing.totalRooms) {
-      throw new ApiError(400, `No more rooms available for the date: ${d.toDateString()}. (Only ${listing.totalRooms - roomsOccupiedOnThisDay} rooms left)`);
-    }
-  }
-
-  // 💰 2. Calculate total price
-  const days = Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24));
-
-  if (days <= 0) {
-    throw new ApiError(400, "Invalid booking dates");
-  }
-
-  const totalPrice = days * listing.price * rooms;
-
-  // 3. Save Booking
+  // Save Booking
   const booking = new Booking({
     listing: id,
     user: req.user.id,
@@ -78,13 +29,20 @@ exports.createBooking = wrapAsync(async (req, res) => {
     status: "confirmed",
   });
 
-  // console.log(booking);
-  // console.log(days, listing.price);
   await booking.save();
 
   res.status(201).json({
     message: "Booking successful",
     booking,
+  });
+});
+
+// Verify Booking Availability
+exports.verifyBooking = wrapAsync(async (req, res) => {
+  res.status(200).json({
+    message: "Booking dates are available",
+    available: true,
+    totalPrice: req.bookingData.totalPrice,
   });
 });
 

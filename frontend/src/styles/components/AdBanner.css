@@ -1,7 +1,7 @@
 .normal-ad-banner {
   display: flex;
   align-items: center;
-  background: #f7f7f7;
+  background: var(--color-bg);
   border-radius: 20px;
   margin: 40px 0;
   overflow: hidden;
@@ -17,14 +17,14 @@
 .ad-banner-content h2 {
   font-size: 32px;
   font-weight: 700;
-  color: #222222;
+  color: var(--color-text);
   margin: 0 0 12px 0;
   letter-spacing: -0.5px;
 }
 
 .ad-banner-content p {
   font-size: 18px;
-  color: #717171;
+  color: var(--color-text-muted);
   margin: 0 0 24px 0;
   max-width: 400px;
   line-height: 1.5;
@@ -32,7 +32,7 @@
 
 .ad-banner-btn {
   display: inline-block;
-  background: #222222;
+  background: var(--color-text);
   color: white;
   padding: 14px 28px;
   border-radius: 8px;

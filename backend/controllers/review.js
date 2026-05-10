@@ -30,10 +30,12 @@ module.exports.createReview = wrapAsync(async (req, res) => {
         status: "confirmed"
     });
 
+    // console.log(hasBooked);
     if (!hasBooked) {
         throw new ApiError(403, "You can only leave a review if you have booked this listing.");
     }
-
+    // console.log('jjlasddqfdsa');
+    // const { rating, comment } = req.body;
     const newReview = new Review(req.body);
     // console.log(newReview);
     // console.log(req.user);
@@ -43,11 +45,12 @@ module.exports.createReview = wrapAsync(async (req, res) => {
         newReview.author = req.user.id;
     }
     newReview.listing = id;
-    // console.log(newReview);
     listing.reviews.push(newReview);
+    // console.log(newReview);
     // console.log(listing);
     await newReview.save();
     await listing.save();
+    // console.log('jjlasddqfdsadsaffdgasgsdag');
 
     res.status(201).json({
         message: "Review created successfully",

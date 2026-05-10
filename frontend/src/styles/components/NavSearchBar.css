@@ -1,0 +1,117 @@
+/* ===== SEARCH BAR ===== */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 40px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  padding: 0 8px 0 16px;
+  width: 50%;
+  transition: all 0.2s ease;
+  margin: 0 20px;
+}
+
+.search-bar:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  border-color: var(--color-border);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 12px;
+  flex: 1;
+}
+
+.input-group label {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.input-group input {
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  color: var(--color-text);
+  outline: none;
+  width: 100%;
+}
+
+.nav-divider {
+  width: 1px;
+  height: 20px;
+  background-color: var(--color-border);
+}
+
+/* ===== SEARCH BUTTON ===== */
+.search-btn {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.search-btn:hover {
+  background: var(--color-primary-hover);
+}
+
+/* ============================= */
+/* ===== RESPONSIVE STYLES ===== */
+/* ============================= */
+
+
+@media(max-width: 768px) {
+  
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+    border: 2px solid rgb(238, 236, 236);
+    box-shadow: none;
+    padding: 10%;
+    width: 100%;
+    max-width: none;
+    margin: 20px 0;
+    gap: 0;
+  }
+
+  .input-group {
+    padding: 12px 0;
+    border-bottom: 1px solid #e6e5e5;
+  }
+
+  .input-group input {
+    font-size: 14px;
+    align-items: center;
+    padding: 4px 0;
+  }
+
+  .nav-divider {
+    display: none;
+  }
+
+  .search-btn {
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 16px;
+    height: 48px;
+  }
+
+  .search-btn::after {
+    content: "Search";
+    margin-left: 10px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+}

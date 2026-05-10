@@ -1,80 +1,8 @@
-// const Listing = require("../models/listing");
-
-// // Index - Get all listings
-// module.exports.index = async (req, res) => {
-//     try {
-//         const allListings = await Listing.find({}).populate("owner");
-//         res.status(200).json(allListings);
-//     } catch (err) {
-//         res.status(500).json({ message: "Error fetching listings", error: err.message });
-//     }
-// };
-
-// // Show - Get single listing
-// module.exports.showListing = async (req, res) => {
-//     try {
-//         const { id } = req.params;
-//         const listing = await Listing.findById(id).populate("owner").populate("reviews");
-//         if (!listing) {
-//             return res.status(404).json({ message: "Listing not found" });
-//         }
-//         res.status(200).json(listing);
-//     } catch (err) {
-//         res.status(500).json({ message: "Error fetching listing", error: err.message });
-//     }
-// };
-
-// // Create - Save new listing
-// module.exports.createListing = async (req, res) => {
-//     // console.log("Received data for new listing:", req.body);
-//     try {
-//         const newListing = new Listing(req.body);
-//         console.log("Creating listing with data:", req.body);
-//         // Assuming user is authenticated and owner is in req.user
-//         // if(req.user) newListing.owner = req.user._id; 
-//         // await newListing.save();
-//         res.status(201).json({ message: "Listing created successfully", listing: newListing });
-//     } catch (err) {
-//         res.status(400).json({ message: "Error creating listing", error: err.message });
-//     }
-// };
-
-// // Update - Edit listing
-// module.exports.updateListing = async (req, res) => {
-//     try {
-//         const { id } = req.params;
-//         const listing = await Listing.findByIdAndUpdate(id, { ...req.body }, { new: true });
-//         if (!listing) {
-//             return res.status(404).json({ message: "Listing not found" });
-//         }
-//         res.status(200).json({ message: "Listing updated successfully", listing });
-//     } catch (err) {
-//         res.status(400).json({ message: "Error updating listing", error: err.message });
-//     }
-// };
-
-// // Delete - Destroy listing
-// module.exports.destroyListing = async (req, res) => {
-//     try {
-//         const { id } = req.params;
-//         const deletedListing = await Listing.findByIdAndDelete(id);
-//         if (!deletedListing) {
-//             return res.status(404).json({ message: "Listing not found" });
-//         }
-//         res.status(200).json({ message: "Listing deleted successfully", listing: deletedListing });
-//     } catch (err) {
-//         res.status(500).json({ message: "Error deleting listing", error: err.message });
-//     }
-// };
-
-
-
 const Listing = require("../models/listing");
 const wrapAsync = require("../utils/wrapAsync");
 const ApiError = require("../utils/ApiError");
-
 const Booking = require("../models/booking");
-
+const Review = require("../models/review");
 // Get all listings with search and availability logic
 module.exports.index = wrapAsync(async (req, res) => {
   const { location, rooms, startDate, endDate, category } = req.query;
@@ -88,7 +16,7 @@ module.exports.index = wrapAsync(async (req, res) => {
   // 2. Filter by Location/Country
   if (location) {
     query.$or = [
-      { "location.name": { $regex: location, $options: "i" } },
+      { location: { $regex: location, $options: "i" } },
       { country: { $regex: location, $options: "i" } }
     ];
   }
@@ -148,6 +76,8 @@ module.exports.index = wrapAsync(async (req, res) => {
 // Get single listing
 module.exports.showListing = wrapAsync(async (req, res) => {
   const { id } = req.params;
+  // console.log(id);
+  // console.log(req.params); 
   const listing = await Listing.findById(id)
     .populate({ path: "owner", select: "username email" })
     .populate({
@@ -155,6 +85,7 @@ module.exports.showListing = wrapAsync(async (req, res) => {
       populate: { path: "author", select: "username" }
     });
   // .populate({ path "author"});
+  // console.log('how many'); 
   // console.log(listing);
   if (!listing) {
     throw new ApiError(404, "Listing not found");
@@ -168,7 +99,7 @@ module.exports.showListing = wrapAsync(async (req, res) => {
 module.exports.createListing = wrapAsync(async (req, res) => {
   const newListing = new Listing(req.body);
 
-  //   console.log("Creating listing with data:", req.body);
+  // console.log("Creating listing with data:", req.body);
 
   // OLD LOGIC (Before Optimization):
   // if (req.user) {
@@ -188,16 +119,12 @@ module.exports.createListing = wrapAsync(async (req, res) => {
       filename: req.file.filename,
     };
   }
+  // console.log("testing1");
 
-  // Handle location object from flat fields
-  if (req.body.locationName) {
-    newListing.location = {
-      name: req.body.locationName
-    };
-  }
-  console.log(req.file);
-  console.log(req.body);
-
+  // console.log("testing2");
+  // console.log(req.file);
+  // console.log(req.body);
+  // console.log(newListing);
   await newListing.save();
 
   res.status(201).json({
@@ -206,7 +133,13 @@ module.exports.createListing = wrapAsync(async (req, res) => {
   });
 });
 
-
+module.exports.verify = (req, res) => {
+  // console.log("BODY:", req.body); // text fields
+  // console.log("FILE:", req.file); // file info
+  // console.log(req.body.contactNo);
+}
+// ************************
+// ***********************************
 // edit listing
 
 module.exports.updateListing = wrapAsync(async (req, res, next) => {
@@ -230,12 +163,7 @@ module.exports.updateListing = wrapAsync(async (req, res, next) => {
     };
   }
 
-  // Handle location object from flat fields
-  if (req.body.locationName) {
-    listing.location = {
-      name: req.body.locationName
-    };
-  }
+
 
   await listing.save();
 
@@ -252,25 +180,51 @@ module.exports.updateListing = wrapAsync(async (req, res, next) => {
 });
 
 
-// destroy listing
+// // destroy listing
+// module.exports.destroyListing = wrapAsync(async (req, res, next) => {
+//   // OLD LOGIC (Before Optimization):
+//   // const deletedListing = await Listing.findByIdAndDelete(id);
+
+//   /**
+//    * OPTIMIZATION 2:
+//    * Same as update—we reuse 'req.listing' which was pre-fetched in the middleware,
+//    * completely avoiding an extra database query.
+//    */
+//   const publicId = req.listing.image?.filename;
+//   await req.listing.deleteOne();
+
+//   // Store the public ID for the middleware to handle Cloudinary cleanup
+//   req.publicId = publicId;
+
+//   res.locals.response = {
+//     message: "Listing deleted successfully",
+//     listing: req.listing,
+//   };
+//   next();
+// });
+
+
+// destroy listing route 
 module.exports.destroyListing = wrapAsync(async (req, res, next) => {
-  // OLD LOGIC (Before Optimization):
-  // const deletedListing = await Listing.findByIdAndDelete(id);
+  const listing = req.listing;
 
-  /**
-   * OPTIMIZATION 2:
-   * Same as update—we reuse 'req.listing' which was pre-fetched in the middleware,
-   * completely avoiding an extra database query.
-   */
-  const publicId = req.listing.image?.filename;
-  await req.listing.deleteOne();
+  // Store image public id for Cloudinary deletion
+  const publicId = listing.image?.filename;
 
-  // Store the public ID for the middleware to handle Cloudinary cleanup
+  // Delete all reviews related to this listing
+  await Review.deleteMany({ listing: listing._id });
+
+  // Delete the listing itself
+  await listing.deleteOne();
+
+  // Pass image id to next middleware (for Cloudinary cleanup)
   req.publicId = publicId;
 
+  // Prepare response
   res.locals.response = {
     message: "Listing deleted successfully",
-    listing: req.listing,
+    listing,
   };
+
   next();
 });

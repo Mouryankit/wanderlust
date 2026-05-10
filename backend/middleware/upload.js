@@ -4,7 +4,7 @@ const cloudinary = require("../config/cloudConfig");
 const wrapAsync = require("../utils/wrapAsync");
 
 exports.uploadListingImage = (req, res, next) => {
-  console.log("Uploading image...");
+  // console.log("Uploading image...");
   // console.log(req.file);
   // console.log(req.body);
   upload.single("image")(req, res, function (err) {
@@ -15,9 +15,13 @@ exports.uploadListingImage = (req, res, next) => {
 
       return next(new ApiError(400, err.message));
     }
-    console.log("Image uploaded successfully");
-    // console.log(req.file);
-    // console.log(req.body);
+    // Check if file is missing. 
+    // It is only mandatory for creation (POST), while for updates (PUT), 
+    // it's optional as the user might want to keep the existing image.
+    if (!req.file && req.method === "POST") {
+      return next(new ApiError(400, "Image is required"));
+    }
+    // console.log("Image processing complete");
     next();
   });
 };
@@ -31,10 +35,10 @@ exports.deleteListingImage = wrapAsync(async (req, res, next) => {
   const publicId = req.oldPublicId || req.publicId; // Fallback for either naming
 
   if (publicId) {
-    console.log(`Deleting image from Cloudinary: ${publicId}`);
+    // console.log(`Deleting image from Cloudinary: ${publicId}`);
     try {
       await cloudinary.uploader.destroy(publicId);
-      console.log("Image deleted from Cloudinary successfully");
+      // console.log("Image deleted from Cloudinary successfully");
     } catch (err) {
       console.error("Cloudinary deletion error:", err.message);
       // We don't throw here to ensure the client still gets the success response 

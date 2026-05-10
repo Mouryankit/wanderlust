@@ -3,7 +3,6 @@
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
-  border: none;
   background: transparent;
   display: flex;
   flex-direction: column;
@@ -15,30 +14,18 @@
   border-radius: 12px;
   overflow: hidden;
   position: relative;
-  background-color: #f0f0f0;
+  background-color: var(--color-border);
 }
 
 .listing-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-.heart-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: transparent;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  user-select: none;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-}
-
-.heart-btn:hover {
-  transform: scale(1.1);
+.listing-card:hover .listing-image {
+  transform: scale(1.05);
 }
 
 .listing-info {
@@ -55,10 +42,11 @@
 }
 
 .listing-header h3 {
+  max-width: 60%;
   margin: 0;
-  /* font-size: 15px; */
   font-weight: 600;
-  color: #222222;
+  color: var(--color-text);
+  font-size: 15px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -66,26 +54,26 @@
 
 .rating {
   font-size: 14px;
-  color: #222222;
+  color: var(--color-text);
   font-weight: 400;
   display: flex;
   align-items: center;
+  gap: 4px;
 }
 
 .listing-title {
   margin: 0;
   font-size: 15px;
-  color: #717171;
+  color: var(--color-text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-
 .price {
-  /* margin: 4px 0 0 0; */
   font-size: 15px;
-  color: #222222;
+  color: var(--color-text);
+  margin-top: 2px;
 }
 
 .price-amount {

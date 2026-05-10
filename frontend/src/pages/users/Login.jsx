@@ -1,41 +1,38 @@
-
-
-
-
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
-import { useNavigate } from "react-router-dom";
+import { setToken, setUser } from "../../utils/token";
+import toast from "react-hot-toast";
 import "../../styles/pages/auth.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const googleButtonRef = useRef(null);
   const navigate = useNavigate();
 
   const handleGoogleResponse = async (response) => {
-    console.log("response token", response);
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     try {
       const res = await API.post("/auth/google", {
         idToken: response.credential,
       });
-
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-
-      alert("Login Successful");
-      navigate("/dashboard");
+      setToken(res.data.token);
+      setUser(res.data.user);
+      toast.success("Login Successful!");
+      navigate("/");
     } catch (error) {
-      alert(error.response?.data?.message || "Google login failed");
+      toast.error(error.response?.data?.message || "Google login failed");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   useEffect(() => {
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-    // console.log(clientId, window.google, googleButtonRef.current);
-    // console.log(window.location.origin);
     if (!clientId || !window.google || !googleButtonRef.current) return;
 
     window.google.accounts.id.initialize({
@@ -54,21 +51,19 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
     try {
-      const res = await API.post("/auth/login", {
-        email,
-        password,
-      });
-
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-
-      alert("Login Successful");
-
+      const res = await API.post("/auth/login", { email, password });
+      setToken(res.data.token);
+      setUser(res.data.user);
+      toast.success("Login Successful!");
       navigate("/");
     } catch (error) {
-      alert(error.response?.data?.message || "Login failed");
+      toast.error(error.response?.data?.message || "Login failed");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -95,7 +90,9 @@ function Login() {
             required
           />
 
-          <button type="submit">Login</button>
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Signing in..." : "Login"}
+          </button>
 
           <div className="auth-link">
             <span>Don't have an account?</span>
@@ -110,5 +107,3 @@ function Login() {
 }
 
 export default Login;
-
-

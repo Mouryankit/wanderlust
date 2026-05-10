@@ -14,7 +14,7 @@
 }
 
 .filter-modal-content {
-  background: white;
+  background: var(--color-surface);
   width: 100%;
   max-width: 780px;
   height: 90vh;
@@ -67,7 +67,7 @@
   justify-content: space-between;
   padding: 16px 24px;
   border-bottom: 1px solid #ebebeb;
-  background: white;
+  background: var(--color-surface);
   position: sticky;
   top: 0;
   z-index: 2;
@@ -86,18 +86,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #222222;
+  color: var(--color-text);
 }
 
 .close-btn:hover {
-  background: #f7f7f7;
+  background: var(--color-bg);
 }
 
 .filter-modal-header h3 {
   margin: 0;
   font-size: 16px;
   font-weight: 800;
-  color: #222222;
+  color: var(--color-text);
 }
 
 /* Body */
@@ -119,13 +119,13 @@
 .filter-section h4 {
   font-size: 20px;
   font-weight: 600;
-  color: #222222;
+  color: var(--color-text);
   margin: 0 0 4px 0;
 }
 
 .filter-subtitle {
   font-size: 14px;
-  color: #717171;
+  color: var(--color-text-muted);
   margin: 0 0 24px 0;
 }
 
@@ -151,13 +151,13 @@
 }
 
 .price-input-wrapper:focus-within {
-  border-color: #222222;
-  box-shadow: 0 0 0 1px #222222;
+  border-color: var(--color-text);
+  box-shadow: 0 0 0 1px var(--color-text);
 }
 
 .price-input-wrapper label {
   font-size: 12px;
-  color: #717171;
+  color: var(--color-text-muted);
   display: block;
   margin-bottom: 2px;
 }
@@ -166,7 +166,7 @@
   display: flex;
   align-items: center;
   font-size: 16px;
-  color: #222222;
+  color: var(--color-text);
 }
 
 .price-input-box span {
@@ -179,7 +179,7 @@
   font-size: 16px;
   width: 100%;
   font-family: inherit;
-  color: #222222;
+  color: var(--color-text);
   background: transparent;
 }
 
@@ -191,7 +191,7 @@
 }
 
 .price-dash {
-  color: #dddddd;
+  color: var(--color-border);
   font-size: 18px;
 }
 
@@ -213,13 +213,13 @@
   margin: 0 0 4px 0;
   font-size: 16px;
   font-weight: 500;
-  color: #222222;
+  color: var(--color-text);
 }
 
 .checkbox-text p {
   margin: 0;
   font-size: 14px;
-  color: #717171;
+  color: var(--color-text-muted);
   max-width: 85%;
   line-height: 1.4;
 }
@@ -231,7 +231,7 @@
 .checkmark {
   height: 24px;
   width: 24px;
-  background-color: white;
+  background-color: var(--color-surface);
   border: 1px solid #b0b0b0;
   border-radius: 4px;
   position: relative;
@@ -240,12 +240,12 @@
 }
 
 .type-checkbox:hover .checkmark {
-  border-color: #222222;
+  border-color: var(--color-text);
 }
 
 .type-checkbox input:checked~.checkmark {
-  background-color: #222222;
-  border-color: #222222;
+  background-color: var(--color-text);
+  border-color: var(--color-text);
 }
 
 .checkmark:after {
@@ -280,7 +280,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 16px;
-  color: #222222;
+  color: var(--color-text);
 }
 
 .counter-controls {
@@ -294,8 +294,8 @@
   height: 32px;
   border-radius: 50%;
   border: 1px solid #b0b0b0;
-  background: white;
-  color: #717171;
+  background: var(--color-surface);
+  color: var(--color-text-muted);
   font-size: 18px;
   display: flex;
   align-items: center;
@@ -305,8 +305,8 @@
 }
 
 .counter-btn:hover:not(:disabled) {
-  border-color: #222222;
-  color: #222222;
+  border-color: var(--color-text);
+  color: var(--color-text);
 }
 
 .counter-btn:disabled {
@@ -328,7 +328,7 @@
   align-items: center;
   padding: 16px 24px;
   border-top: 1px solid #ebebeb;
-  background: white;
+  background: var(--color-surface);
   position: sticky;
   bottom: 0;
   z-index: 2;
@@ -340,7 +340,7 @@
   text-decoration: underline;
   font-size: 16px;
   font-weight: 600;
-  color: #222222;
+  color: var(--color-text);
   cursor: pointer;
   padding: 8px 12px;
   margin-left: -12px;
@@ -349,11 +349,11 @@
 }
 
 .clear-all-btn:hover {
-  background: #f7f7f7;
+  background: var(--color-bg);
 }
 
 .show-places-btn {
-  background: #222222;
+  background: var(--color-text);
   color: white;
   border: none;
   padding: 14px 24px;

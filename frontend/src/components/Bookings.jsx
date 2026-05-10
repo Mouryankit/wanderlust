@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/components/Bookings.css";
 
-const Bookings = ({ bookings, title }) => {
+const Bookings = ({ bookings, title, isOwnerView = false }) => {
   if (!bookings || bookings.length === 0) {
     return (
       <div className="no-bookings">
@@ -12,7 +12,7 @@ const Bookings = ({ bookings, title }) => {
 
   return (
     <div className="bookings-section">
-      <h4 className="bookings-title">{title}</h4>
+      {/* <h4 className="bookings-title">{title}</h4> */}
       <div className="bookings-grid">
         {bookings.map((booking) => {
           const isCompleted = new Date(booking.checkOut) < new Date();
@@ -21,11 +21,14 @@ const Bookings = ({ bookings, title }) => {
             <div key={booking._id} className={`booking-card-item ${isCompleted ? 'completed' : 'upcoming'}`}>
               <div className="booking-card-header">
                 <div className="user-info">
-                  <div className="user-avatar">
-                    {booking.user?.username?.[0]?.toUpperCase() || "?"}
-                  </div>
                   <div className="user-details">
-                    <span className="username">{booking.user?.username || "Guest"}</span>
+                    <span className="listing-name">
+                      {isOwnerView
+                        ? booking.user?.username || "Guest"
+                        : booking.listing?.title?.length > 20
+                          ? `${booking.listing.title.slice(0, 20)}...`
+                          : booking.listing?.title}
+                    </span>
                     <span className="guest-count">
                       {booking.guests} {booking.guests === 1 ? 'Guest' : 'Guests'} • {booking.rooms} {booking.rooms === 1 ? 'Room' : 'Rooms'}
                     </span>
@@ -57,8 +60,8 @@ const Bookings = ({ bookings, title }) => {
                 </div>
                 {isCompleted && <span className="completed-marker">✓ Completed</span>}
                 {!isCompleted && booking.status !== "cancelled" && booking.onCancel && (
-                  <button 
-                    className="cancel-booking-btn" 
+                  <button
+                    className="cancel-booking-btn"
                     onClick={() => booking.onCancel(booking._id, booking.listing?._id)}
                   >
                     Cancel

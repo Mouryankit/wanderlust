@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Listings from "../../components/Listings.jsx";
 import CategoryFilter from "../../components/CategoryFilter.jsx";
 import AdBanner from "../../components/AdBanner.jsx";
+import Loading from "../../components/Loading.jsx";
 import API from "../../api/axios.js";
 import "../../styles/pages/Explore.css";
 
@@ -14,12 +15,9 @@ const Explore = () => {
 
   useEffect(() => {
     const fetchListings = async () => {
-      setLoading(true);
       try {
-        // Parse search params from URL
+        setLoading(true);
         const searchParams = new URLSearchParams(location.search);
-
-        // Combine category with search params
         if (activeCategory && activeCategory !== "All") {
           searchParams.set("category", activeCategory);
         }
@@ -27,7 +25,7 @@ const Explore = () => {
         const res = await API.get(`/listings?${searchParams.toString()}`);
         setListings(res.data);
       } catch (err) {
-        console.error("Error fetching listings:", err);
+        console.error("Explore Fetch Error:", err);
       } finally {
         setLoading(false);
       }
@@ -35,6 +33,8 @@ const Explore = () => {
 
     fetchListings();
   }, [location.search, activeCategory]);
+
+  if (loading) return <Loading />;
 
   return (
     <div className="explore-page">
@@ -44,15 +44,7 @@ const Explore = () => {
       />
 
       <div className="explore-content">
-        {loading ? (
-          <div className="loading-container">
-            <div className="loader"></div>
-            <p>Searching for your next adventure...</p>
-          </div>
-        ) : (
-          <Listings listings={listings} />
-        )}
-
+        <Listings listings={listings} />
         <AdBanner />
       </div>
     </div>

@@ -10,7 +10,7 @@ exports.isOwner = wrapAsync(async (req, res, next) => {
   if (!listing) {
     // throw new ApiError(404, "Listing not found");
     // res.status(404).json({ error: "Listing not found" });
-    throw new ApiError(404, "Lsting not");
+    throw new ApiError(404, "Lsting not found");
   }
 
   if (listing.owner.toString() !== req.user.id) {

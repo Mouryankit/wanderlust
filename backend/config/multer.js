@@ -1,4 +1,4 @@
-const multer = require("multer");
+const multer = require("multer");     //multer middleware is used to handle file upload 
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("./cloudConfig");
 
@@ -11,8 +11,8 @@ const storage = new CloudinaryStorage({
 });
 
 const upload = multer({ 
-    storage,
-    limits: { fileSize: 2 * 1024 * 1024 } // 2MB
+    storage: storage,
+    limits: { fileSize: 2 * 1024 * 1024 } // max 2MB limit allowed 
 });
 
 module.exports = upload;

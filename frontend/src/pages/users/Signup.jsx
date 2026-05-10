@@ -1,74 +1,30 @@
-// import { useState } from "react";
-// import { signup } from "../services/authService";
-
-// function Signup() {
-
-//   const [form, setForm] = useState({
-//     name: "",
-//     email: "",
-//     password: ""
-//   });
-
-//   const handleChange = (e) => {
-//     setForm({
-//       ...form,
-//       [e.target.name]: e.target.value
-//     });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     try {
-//       const res = await signup(form);
-//       alert(res.data.message);
-//     } catch (err) {
-//       alert(err.response.data.message);
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <input name="name" placeholder="Name" onChange={handleChange}/> <br></br>
-//       <input name="email" placeholder="Email" onChange={handleChange}/> <br></br>
-//       <input name="password" type="password" placeholder="Password" onChange={handleChange}/> <br></br>
-//       <button type="submit">Signup</button>
-//     </form>
-//   );
-// }
-
-// export default Signup;
-
-
-
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
-import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import "../../styles/pages/auth.css";
 
 function Signup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
     try {
-      await API.post("/auth/signup", {
-        username,
-        email,
-        password,
-      });
-
-      alert("Signup Successful");
-
+      await API.post("/auth/signup", { username, email, password });
+      toast.success("Account created successfully!");
       navigate("/login");
     } catch (error) {
-      alert(error.response?.data?.message || "Signup failed");
+      toast.error(error.response?.data?.message || "Signup failed");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -103,7 +59,9 @@ function Signup() {
             required
           />
 
-          <button type="submit">Sign up</button>
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Creating account..." : "Sign up"}
+          </button>
 
           <div className="auth-link">
             <span>Already have an account?</span>

@@ -1,0 +1,20 @@
+/* Owner Booking Dashboard Section */
+.owner-dashboard-container {
+  /* margin-top: 10px; */
+  padding-top: 40px;
+  /* border-top: 1px solid var(--color-border); */
+}
+
+.dashboard-main-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 32px;
+  letter-spacing: -0.5px;
+}
+
+.dashboard-separator {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin-bottom: 32px;
+}

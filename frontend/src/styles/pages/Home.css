@@ -1,4 +1,4 @@
-.dashboard {
+.home-container {
   padding: 40px 60px;
   max-width: 1600px;
   margin: 0 auto;
@@ -7,23 +7,32 @@
 .explore-header {
   font-size: 32px;
   font-weight: 700;
-  color: #222222;
+  color: var(--color-text);
   margin-bottom: 32px;
   margin-left: 8px;
   letter-spacing: -0.5px;
 }
 
-
 @media (max-width: 800px) {
-  .dashboard {
+  .home-container {
     padding: 30px 40px;
   }
-
 }
 
 @media (max-width: 550px) {
-  .dashboard {
+  .home-container {
     padding: 24px;
   }
+}
 
+
+.home-error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  color: var(--color-text-muted);
+  font-size: 18px;
+  gap: 20px;
 }
