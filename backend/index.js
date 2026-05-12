@@ -18,8 +18,6 @@ if (process.env.NODE_ENV !== 'production') {
   dns.setServers(['8.8.8.8', '1.1.1.1']);
 }
 
-// dns.setServers(['8.8.8.8', '1.1.1.1']);  // Google/Cloudflare DNS
-
 // connect database
 connectDB();
 
@@ -33,6 +31,14 @@ app.use(cors({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.get("/api", (req, res) => {
+  res.status(200).json({
+    success: true,
+    app: "Wanderlust API",
+    status: "Running"
+  });
+});
 
 // routes
 app.use("/api/auth", authRoutes);

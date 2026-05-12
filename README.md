@@ -1,139 +1,202 @@
 # 🌍 Wanderlust
 
-Wanderlust is a full-stack web application inspired by Airbnb, built using the **MERN (MongoDB, Express, React, Node.js)** stack. It provides a platform for users to list their properties, browse available accommodations, and seamlessly book their next stay.
+Wanderlust is a full-stack travel booking web application inspired by platforms like Airbnb.  
+It allows users to explore unique stays, list their own properties, and book trips with a smooth and modern experience.
 
-## ✨ Features
+This project was built using the **MERN Stack** — MongoDB, Express.js, React.js, and Node.js — with a focus on creating a clean UI, real-world booking logic, and a scalable backend architecture.
 
-* **User Authentication & Authorization:** Secure sign-up, login, and protected routes. Distinct roles for guests and property owners.
-* **Listing Management:** Owners can create, update, and delete their property listings. Includes image uploads via Cloudinary.
-* **Advanced Search & Filtering:** Filter listings by destination, category, and minimum required rooms.
-* **Booking System:** Robust booking engine that checks for overlapping dates and ensures real-time availability before confirming a reservation.
-* **Owner Dashboard:** A dedicated interface for property owners to manage their upcoming, completed, and cancelled bookings.
-* **Guest Profile:** A centralized section for guests to view their reservation history and upcoming trips.
-* **Review & Rating System:** Guests can leave detailed reviews and star ratings for properties they've visited.
-* **Modern UI/UX:** A responsive, interactive, and premium design using a custom "Ocean-Blue" CSS design system. Features smooth micro-animations and global toast notifications (via `react-hot-toast` and `sweetalert2`).
+## 🚀 Live Demo
+
+- Frontend Deployment: [Render Deployment](https://wanderlust-36j4.onrender.com)
+- Backend Deployment: [Render Deployment](https://wanderlust-r-34ck.onrender.com)
 
 ---
 
-## 🛠️ Tech Stack
+# ✨ Features
 
-**Frontend:**
-* [React.js](https://reactjs.org/) (via Vite)
-* React Router DOM
-* Vanilla CSS (Custom Design System)
-* React Icons
-* React Hot Toast & SweetAlert2 (Notifications)
+### 🔐 Authentication & Authorization
+- Secure signup and login system
+- Protected routes for authenticated users
+- Separate experiences for guests and property owners
 
-**Backend:**
-* [Node.js](https://nodejs.org/) & [Express.js](https://expressjs.com/)
-* [MongoDB](https://www.mongodb.com/) & Mongoose
-* Joi (Schema Validation)
-* Multer & Cloudinary (Image Uploads)
-* JWT / Passport.js (Authentication)
+### 🏡 Property Listings
+- Create, edit, and delete property listings
+- Upload listing images using Cloudinary
+- Add property details like price, location, rooms, and description
 
----
+### 🔎 Search & Filtering
+- Search listings by destination
+- Filter properties by category and room requirements
+- Easy and responsive browsing experience
 
-## 🚀 Getting Started
+### 📅 Booking System
+- Real-time availability checking
+- Prevents overlapping bookings
+- Dynamic booking price calculation
+- Support for upcoming, completed, and cancelled trips
 
-To get a local copy up and running, follow these simple steps.
+### 👤 Guest Profile
+- View upcoming trips
+- Access booking history
+- Cancel reservations
 
-### Prerequisites
-* [Node.js](https://nodejs.org/en/download/) (v16 or higher)
-* [MongoDB](https://www.mongodb.com/try/download/community) installed locally or a MongoDB Atlas URI
-* A [Cloudinary](https://cloudinary.com/) account for image uploads
+### 🧑‍💼 Owner Dashboard
+- Manage property listings
+- View completed and cancelled stays
 
-### Installation
+### ⭐ Reviews & Ratings
+- Leave reviews after completed stays
+- Star rating system for listings
+- Improve trust and transparency between guests and hosts
 
-1. **Clone the repository**
-   ```sh
-   git clone https://github.com/Mouryankit/wanderlust.git
-   cd wanderlust
-   ```
 
-2. **Setup Backend**
-   ```sh
-   cd backend
-   npm install
-   ```
-   Create a `.env` file in the `backend` directory and add the following variables:
-   ```env
-   PORT=5000
-   MONGODB_URI=your_mongodb_connection_string
-   SECRET=your_jwt_or_session_secret
-   CLOUD_NAME=your_cloudinary_cloud_name
-   CLOUD_API_KEY=your_cloudinary_api_key
-   CLOUD_API_SECRET=your_cloudinary_api_secret
-   FRONTEND_URL=http://localhost:5173
-   ```
-
-3. **Setup Frontend**
-   ```sh
-   cd ../frontend
-   npm install
-   ```
-   Create a `.env` file in the `frontend` directory and add the following variables:
-   ```env
-   VITE_API_URL=http://localhost:5000/api
-   ```
-
-### Running the Application
-
-1. **Start the Backend Server**
-   ```sh
-   # In the /backend directory
-   npm start
-   # or npm run dev (if nodemon is configured)
-   ```
-
-2. **Start the Frontend Client**
-   ```sh
-   # In the /frontend directory
-   npm run dev
-   ```
-
-3. Open your browser and navigate to `http://localhost:5173`.
+### 🎨 Modern UI/UX
+- Responsive design
+- Smooth animations and transitions
+- Toast notifications using `react-hot-toast` and `sweetalert2`
 
 ---
 
-## 📂 Project Structure
+# 🛠️ Tech Stack
 
-```
+## Frontend
+- React.js (Vite)
+- React Router DOM
+- Vanilla CSS
+- React Icons
+- React Hot Toast
+- SweetAlert2
+
+## Backend
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- Joi Validation
+- JWT / Passport.js Authentication
+
+## Cloud & Media
+- Cloudinary
+- Multer
+
+---
+
+
+# 📂 Project Structure
+
+```txt
 wanderlust/
-├── backend/                  # Express.js Server
-│   ├── config/               # DB Connection & Configurations
-│   ├── controllers/          # Route Logic (Listings, Users, Bookings)
-│   ├── middleware/           # Auth, Error Handling, Validation
-│   ├── models/               # Mongoose Schemas
-│   ├── routes/               # API Endpoints
-│   └── utils/                # Async Wrappers & Custom Error Classes
+├── backend/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   └── utils/
 │
-└── frontend/                 # React Client
-    ├── public/               # Static Assets
+└── frontend/
+    ├── public/
     └── src/
-        ├── components/       # Reusable UI Components
-        ├── pages/            # View Templates (Home, Profile, etc.)
-        ├── styles/           # Global and Component-Specific CSS
-        └── utils/            # Helper Functions & API Services
+        ├── components/
+        ├── pages/
+        ├── styles/
+        └── utils/
 ```
 
 ---
 
-## 🤝 Contributing
+# 🔗 API Routes
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+## Authentication Routes
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+| Method | Route | Description |
+|--------|-------|-------------|
+| POST | `/api/auth/signup` | Register a new user |
+| POST | `/api/auth/login` | Login user |
+| POST | `/api/auth/google` | Google authentication |
+| POST | `/api/auth/logout` | Logout user |
 
 ---
 
-## 👨‍💻 Developer
+## Listing Routes
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| GET | `/api/listings` | Get all listings |
+| POST | `/api/listings` | Create a new listing |
+| GET | `/api/listings/:id` | Get single listing details |
+| PUT | `/api/listings/:id` | Update listing |
+| DELETE | `/api/listings/:id` | Delete listing |
+
+---
+
+## Booking Routes
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| GET | `/api/listings/:id/bookings` | Get all bookings for a listing |
+| POST | `/api/listings/:id/bookings/verify` | Verify booking availability |
+| POST | `/api/listings/:id/bookings` | Create a booking |
+| DELETE | `/api/listings/:id/bookings/:bookingId` | Cancel booking |
+
+---
+
+## Review Routes
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| GET | `/api/listings/:id/reviews` | Get all reviews for a listing |
+| POST | `/api/listings/:id/reviews` | Create a review |
+| PUT | `/api/listings/:id/reviews/:reviewId` | Update review |
+| DELETE | `/api/listings/:id/reviews/:reviewId` | Delete review |
+
+---
+
+## Profile Routes
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| GET | `/api/profile/listings` | Get logged-in user listings |
+| GET | `/api/profile/bookings` | Get logged-in user bookings |
+| GET | `/api/profile/reviews` | Get logged-in user reviews |
+
+---
+
+# 🛡️ Middleware Features
+
+- Authentication & Authorization
+- Protected Routes
+- Owner Verification
+- Review Author Verification
+- Booking Ownership Validation
+- Request Validation using Joi
+- Centralized Error Handling
+- Async Error Wrapper Utility
+
+---
+
+# 📌 API Design Highlights
+
+- RESTful API Architecture
+- Nested Routes for Reviews & Bookings
+- Modular Route Separation
+- Controller-Based Logic
+- Middleware-Driven Validation
+- Secure Authentication Flow
+
+---
+
+# 👨‍💻 Developer
 
 **Ankit Mourya**
-* [Portfolio](https://mouryankit.github.io/portfolio/)
-* [LinkedIn](https://www.linkedin.com/in/ankit-mourya-7a3185291/)
-* [GitHub](https://github.com/Mouryankit)
-* [LeetCode](https://leetcode.com/u/Mouryankit/)
+
+- GitHub: [GitHub Profile](https://github.com/Mouryankit)
+- LinkedIn: [LinkedIn Profile](https://www.linkedin.com/in/ankit-mourya-7a3185291/)
+- Portfolio: [Portfolio Website](https://mouryankit.github.io/portfolio)
+- LeetCode: [LeetCode Profile](https://leetcode.com/u/Mouryankit)
+
+---
+
+# Final Note
+
+Wanderlust was built as a real-world MERN stack project to practice scalable backend development, booking logic, authentication, and modern frontend UI design.
