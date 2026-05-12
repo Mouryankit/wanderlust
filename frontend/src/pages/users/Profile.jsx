@@ -84,16 +84,16 @@ const Profile = () => {
         );
       case "Bookings":
         const today = new Date();
-        const upcoming = data.bookings.filter(b => new Date(b.checkIn) >= today && b.status !== "cancelled")
+        const upcoming = data.bookings.filter(b => new Date(b.checkOut) > today && b.status !== "cancelled")
           .map(b => ({ ...b, onCancel: handleCancelBooking }));
         const completed = data.bookings.filter(b => new Date(b.checkOut) < today || b.status === "cancelled");
         return (
           <div className="profile-bookings-view">
-            <Bookings bookings={upcoming} title="Upcoming Trips" />
+            <Bookings bookings={upcoming} title="Upcoming / Current Trips" />
             {completed.length > 0 && (
               <>
                 <div className="divider" />
-                <Bookings bookings={completed} title="Past Trips" />
+                <Bookings bookings={completed} title="Past / cancelled Trips" />
               </>
             )}
           </div>

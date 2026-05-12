@@ -12,8 +12,8 @@ const ListingCard = ({ listing }) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  const locationName = typeof listing.location === "object" 
-    ? listing.location.name 
+  const locationName = typeof listing.location === "object"
+    ? listing.location.name
     : (listing.location || "Unknown Location");
 
   // Fix: Handle both listing.image.url (singular) and listing.images[0].url (plural)
@@ -41,6 +41,9 @@ const ListingCard = ({ listing }) => {
               ? (listing.reviews.reduce((acc, curr) => acc + curr.rating, 0) / listing.reviews.length).toFixed(1)
               : "No review"}
           </span>
+          {/* {console.log(listing.reviews)} */}
+          {/* {console.log(listing.reviews.reduce((acc, curr) => acc + curr.rating, 0))} */}
+          {/* {console.log(listing.reviews.reduce((acc, curr) => acc + curr.rating, 0))} */}
         </div>
 
         <p className="listing-title">{listing.title || "No Title"}</p>

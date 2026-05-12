@@ -31,7 +31,7 @@
   align-items: center;
   gap: 4px;
   padding: 3px 0;
-  cursor: pointer;
+  /* cursor: pointer; */
   /* background: transparent; */
 }
 
@@ -48,6 +48,7 @@
   border: none;
   background: transparent;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .login-btn:hover,
@@ -66,7 +67,9 @@
   display: flex;
   align-items: center;
   white-space: nowrap;
+  cursor: pointer;
 }
+
 
 /* ============================= */
 /* ===== MOBILE RESPONSIVE ===== */
@@ -110,9 +113,16 @@
     font-weight: 600;
     justify-content: center;
   }
+  .signup-btn{
+    margin-top: 10px; 
+  }
 
   .profile {
     margin-top: 10px;
     width: 100%;
+  }
+
+  .profile span:hover{
+    background-color: #ababab;
   }
 }

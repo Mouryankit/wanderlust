@@ -82,7 +82,7 @@ module.exports.showListing = wrapAsync(async (req, res) => {
     .populate({ path: "owner", select: "username email" })
     .populate({
       path: "reviews",
-      populate: { path: "author", select: "username" }
+      populate: { path: "author", select: "username"}
     });
   // .populate({ path "author"});
   // console.log('how many'); 

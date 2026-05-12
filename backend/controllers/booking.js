@@ -11,6 +11,13 @@ exports.index = wrapAsync(async (req, res) => {
   res.status(200).json(bookings);
 });
 
+// date normalization
+const normalizeDate = (date) => {
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  return d;
+};
+
 // Create Booking
 exports.createBooking = wrapAsync(async (req, res) => {
   const { id } = req.params; // listing id
@@ -21,8 +28,8 @@ exports.createBooking = wrapAsync(async (req, res) => {
   const booking = new Booking({
     listing: id,
     user: req.user.id,
-    checkIn,
-    checkOut,
+    checkIn: normalizeDate(checkIn),
+    checkOut: normalizeDate(checkOut),
     guests,
     rooms,
     totalPrice,

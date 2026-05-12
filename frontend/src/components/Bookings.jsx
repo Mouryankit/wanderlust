@@ -12,7 +12,8 @@ const Bookings = ({ bookings, title, isOwnerView = false }) => {
 
   return (
     <div className="bookings-section">
-      {/* <h4 className="bookings-title">{title}</h4> */}
+      <h4 className="bookings-title">{title}</h4>
+      <br></br>
       <div className="bookings-grid">
         {bookings.map((booking) => {
           const isCompleted = new Date(booking.checkOut) < new Date();
