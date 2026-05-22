@@ -105,7 +105,16 @@ const BookingSection = ({ listingId, listing, currentUser, isOwner, price, onBoo
     }
   };
 
-  // ── Cancel an existing booking ──
+  //timezone issue fix for datepicker by normalizing time to 00:00:00 before sending to backend
+  const normalizeDate = (date) => {
+    return new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
+  };
+
+    // ── Cancel an existing booking ──
   const cancelBooking = async (id) => {
     const result = await Swal.fire({
       title: "Cancel Booking?",
@@ -141,12 +150,12 @@ const BookingSection = ({ listingId, listing, currentUser, isOwner, price, onBoo
         <div className="booking-inputs-grid">
           <div className="input-field">
             <label>CHECK-IN</label>
-            <DatePicker selected={checkIn} onChange={(d) => { setCheckIn(d); resetStatus(); }}
+            <DatePicker selected={checkIn} onChange={(d) => { setCheckIn(normalizeDate(d)); resetStatus(); }}
               selectsStart startDate={checkIn} endDate={checkOut} minDate={new Date()} placeholderText="Select date" />
           </div>
           <div className="input-field">
             <label>CHECK-OUT</label>
-            <DatePicker selected={checkOut} onChange={(d) => { setCheckOut(d); resetStatus(); }}
+            <DatePicker selected={checkOut} onChange={(d) => { setCheckOut(normalizeDate(d)); resetStatus(); }}
               selectsEnd startDate={checkIn} endDate={checkOut} minDate={checkIn || new Date()} placeholderText="Select date" />
           </div>
           <div className="input-field">

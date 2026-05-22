@@ -25,7 +25,8 @@ function App() {
             {
               duration: 3000,
               style: {
-                marginTop: "70px"
+                marginTop: "70px",
+                border: "2px solid #d2cfcfff",
               }
             }
           }

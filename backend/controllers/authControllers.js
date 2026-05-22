@@ -54,7 +54,7 @@ exports.login = async (req, res) => {
 
     if (!user) {
       return res.status(400).json({
-        message: "Invalid email or password",
+        message: "Invalid email",
       });
     }
 
@@ -62,7 +62,7 @@ exports.login = async (req, res) => {
 
     if (!isMatch) {
       return res.status(400).json({
-        message: "Invalid email or password",
+        message: "Invalid password",
       });
     }
 
@@ -71,6 +71,9 @@ exports.login = async (req, res) => {
     //   process.env.JWT_SECRET,
     //   { expiresIn: "7d" }
     // );
+    // console.log("Generating token for user ID:", user);
+    
+    user.password = undefined; // Exclude password from response
     const token = generateToken(user._id);
 
     res.json({
