@@ -46,6 +46,7 @@ function Login() {
       type: "standard",
       shape: "pill",
       text: "continue_with",
+      width:"100%",
     });
   }, []);
 

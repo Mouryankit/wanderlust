@@ -23,23 +23,34 @@ exports.verifyAvailability = wrapAsync(async (req, res, next) => {
   }
 
   // Check Availability (Overbooking check with Overlapping Ranges)
+  // normalize incoming dates to UTC-midnight to avoid timezone mismatches
+  const normalizeDate = (date) => {
+    if (!date) return null;
+    if (typeof date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      const [y, m, d] = date.split("-").map(Number);
+      return new Date(Date.UTC(y, m - 1, d));
+    }
+    const dObj = new Date(date);
+    return new Date(Date.UTC(dObj.getFullYear(), dObj.getMonth(), dObj.getDate()));
+  };
+
+  const start = normalizeDate(checkIn);
+  const end = normalizeDate(checkOut);
+
   const overlappingBookings = await Booking.find({
     listing: id,
     status: "confirmed",
     $or: [
-      { checkIn: { $lt: new Date(checkOut) }, checkOut: { $gt: new Date(checkIn) } }
+      { checkIn: { $lt: end }, checkOut: { $gt: start } }
     ]
   });
 
-  const start = new Date(checkIn);
-  const end = new Date(checkOut);
-
-  for (let d = new Date(start); d < end; d.setDate(d.getDate() + 1)) {
+  for (let d = new Date(start); d < end; d.setUTCDate(d.getUTCDate() + 1)) {
     let roomsOccupiedOnThisDay = 0;
 
     overlappingBookings.forEach(b => {
-      const bStart = new Date(b.checkIn);
-      const bEnd = new Date(b.checkOut);
+      const bStart = new Date(Date.UTC(b.checkIn.getUTCFullYear(), b.checkIn.getUTCMonth(), b.checkIn.getUTCDate()));
+      const bEnd = new Date(Date.UTC(b.checkOut.getUTCFullYear(), b.checkOut.getUTCMonth(), b.checkOut.getUTCDate()));
       if (d >= bStart && d < bEnd) {
         roomsOccupiedOnThisDay += (b.rooms || 1);
       }
@@ -51,7 +62,7 @@ exports.verifyAvailability = wrapAsync(async (req, res, next) => {
   }
 
   // Calculate total price
-  const days = Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24));
+  const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
 
   if (days <= 0) {
     throw new ApiError(400, "Invalid booking dates");

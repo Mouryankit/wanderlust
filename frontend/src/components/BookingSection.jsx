@@ -52,13 +52,15 @@ const BookingSection = ({ listingId, listing, currentUser, isOwner, price, onBoo
 
     try {
       // Use the new backend middleware verification route
+      const toDateOnly = (d) => d ? `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}` : null;
+
       await API.post(`/listings/${listingId}/bookings/verify`, {
-        checkIn,
-        checkOut,
+        checkIn: toDateOnly(checkIn),
+        checkOut: toDateOnly(checkOut),
         guests,
         rooms
       });
-      
+
       setStatus("available");
     } catch (err) {
       setStatus("unavailable");
@@ -96,7 +98,10 @@ const BookingSection = ({ listingId, listing, currentUser, isOwner, price, onBoo
     if (!result.isConfirmed) return;
 
     try {
-      await API.post(`/listings/${listingId}/bookings`, { checkIn, checkOut, guests, rooms });
+      // send date-only strings (YYYY-MM-DD) to avoid timezone shifts when serialized
+      const toDateOnly = (d) => d ? `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}` : null;
+
+      await API.post(`/listings/${listingId}/bookings`, { checkIn: toDateOnly(checkIn), checkOut: toDateOnly(checkOut), guests, rooms });
       toast.success("Booking confirmed!");
       setCheckIn(null); setCheckOut(null); setGuests(1); setRooms(1); setStatus(null);
       if (onBookingChange) onBookingChange();

@@ -11,11 +11,19 @@ exports.index = wrapAsync(async (req, res) => {
   res.status(200).json(bookings);
 });
 
-// date normalization
+// date normalization: produce a Date at 00:00 UTC for the provided calendar date
 const normalizeDate = (date) => {
-  const d = new Date(date);
-  d.setHours(0, 0, 0, 0);
-  return d;
+  if (!date) return null;
+
+  // If date is a YYYY-MM-DD string (from frontend), parse as UTC
+  if (typeof date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    const [y, m, d] = date.split("-").map(Number);
+    return new Date(Date.UTC(y, m - 1, d));
+  }
+
+  // Otherwise, create a UTC date using the year/month/day of the provided Date
+  const dObj = new Date(date);
+  return new Date(Date.UTC(dObj.getFullYear(), dObj.getMonth(), dObj.getDate()));
 };
 
 // Create Booking
