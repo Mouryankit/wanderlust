@@ -83,3 +83,35 @@
 .auth-link a:hover {
   text-decoration: underline;
 }
+
+/* Password Input & Toggle Button Styling */
+.auth-form .password-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.auth-form .password-input-wrapper input {
+  padding-right: 45px; /* Leaves room for the icon */
+}
+
+.auth-form .password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  color: var(--color-text-muted);
+  padding: 4px;
+  margin: 0;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  border-radius: 50%;
+}
+
+.auth-form .password-toggle:hover {
+  background: transparent;
+  color: var(--color-primary);
+}

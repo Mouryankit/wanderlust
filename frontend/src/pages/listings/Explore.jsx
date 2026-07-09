@@ -34,7 +34,7 @@ const Explore = () => {
     fetchListings();
   }, [location.search, activeCategory]);
 
-  if (loading) return <Loading />;
+  // if (loading) return <Loading />;
 
   return (
     <div className="explore-page">
@@ -44,7 +44,9 @@ const Explore = () => {
       />
 
       <div className="explore-content">
-        <Listings listings={listings} />
+        {
+          loading ? <Loading/> : <Listings listings={listings} />
+        }
         <AdBanner />
       </div>
     </div>

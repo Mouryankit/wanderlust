@@ -6,6 +6,8 @@ import AdBanner from "../../components/AdBanner.jsx";
 import Loading from "../../components/Loading.jsx";
 import "../../styles/pages/Home.css";
 
+
+let firstRequest = true; 
 const Home = () => {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,13 +25,26 @@ const Home = () => {
         setError("Failed to load listings. Please try again later.");
       } finally {
         setLoading(false);
+        firstRequest = false; 
       }
     };
 
     fetchListings();
   }, []);
 
-  if (loading) return <Loading />;
+  // if (loading) return <Loading />;
+
+  if (loading) {
+    return (
+      <Loading
+        message={
+          firstRequest
+            ? "Please wait while we wake up the server. This may take up to 2 minutes on your first visit."
+            : "Loading Wanderlust..."
+        }
+      />
+    );
+  }
 
   if (error) {
     return (

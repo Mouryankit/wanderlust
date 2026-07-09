@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
 import toast from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../../styles/pages/auth.css";
 
 function Signup() {
@@ -9,6 +10,7 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -51,13 +53,23 @@ function Signup() {
             required
           />
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className="password-input-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button
+              type="button"
+              className="password-toggle"
+              onClick={() => setShowPassword((prev) => !prev)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
 
           <button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Creating account..." : "Sign up"}

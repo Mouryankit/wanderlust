@@ -54,9 +54,9 @@
 .category-item-grid.active {
   opacity: 1;
   color: var(--color-primary);
-  border-bottom: 2px solid var(--color-primary);
+  /* border-bottom: 2px solid var(--color-primary); */
   /* Simple indicator */
-  border-radius: 0;
+  /* border-radius: 0; */
 }
 
 .category-icon {
