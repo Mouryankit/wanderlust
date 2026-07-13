@@ -96,6 +96,9 @@ function ListingDetails() {
 
   return (
     <div className="listing-detail-container">
+      <button type="button" className="detail-back-btn" onClick={() => navigate(-1)}>
+        &larr; Back
+      </button>
       {/* TITLE */}
       <h1 className="listing-detail-title">{capitalize(listing.title)}</h1>
 

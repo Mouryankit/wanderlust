@@ -9,6 +9,8 @@ const reviewRoutes = require("./routes/review");
 const bookingRoutes = require("./routes/booking");
 const profileRoutes = require("./routes/profileRouter");
 const errorHandler = require("./middleware/errorHandler");
+const cron = require("node-cron");
+const runGuestCleanup = require("./utils/cleanup");
 
 const app = express();
 
@@ -58,4 +60,12 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   // console.log(`Server running on port ${PORT}`);
+  
+  // Schedule guest cleanup job to run every hour
+  cron.schedule("0 * * * *", () => {
+    runGuestCleanup();
+  });
+
+  // Run cleanup once on startup to clean up leftover users from previous runs
+  runGuestCleanup();
 });

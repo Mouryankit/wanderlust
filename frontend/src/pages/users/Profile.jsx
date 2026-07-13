@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Listings from "../../components/Listings.jsx";
 import Bookings from "../../components/Bookings.jsx";
 import ReviewsList from "../../components/ReviewsList.jsx";
@@ -10,6 +11,7 @@ import Swal from "sweetalert2";
 import "../../styles/pages/Profile.css";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Listings");
   const [data, setData] = useState({ listings: [], bookings: [], reviews: [] });
   const [loading, setLoading] = useState(true);
@@ -113,6 +115,9 @@ const Profile = () => {
           <p>{currentUser.email}</p>
           <span className="join-date">Member since {new Date(currentUser.createdAt || Date.now()).getFullYear()}</span>
         </div>
+        <button type="button" className="profile-back-btn" onClick={() => navigate(-1)}>
+          &larr; Back
+        </button>
       </div>
 
       <div className="profile-tabs">

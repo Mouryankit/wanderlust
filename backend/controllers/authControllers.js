@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { OAuth2Client } = require("google-auth-library");
 const generateToken = require("../utils/generateToken");
+const crypto = require("crypto");
 
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
@@ -163,6 +164,40 @@ exports.googleLogin = async (req, res) => {
     res.status(401).json({
       message: "Google login failed",
       error: error.message
+    });
+  }
+};
+
+exports.guestLogin = async (req, res) => {
+  try {
+    const randomHex = crypto.randomBytes(4).toString("hex");
+    const guestEmail = `guest_${randomHex}@temp.com`;
+    const guestUsername = `Guest_${randomHex}`;
+    const hashedPassword = await bcrypt.hash("guest_temp_password_123", 10);
+    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // Expires in 24 hours
+
+    const user = new User({
+      username: guestUsername,
+      email: guestEmail,
+      password: hashedPassword,
+      isGuest: true,
+      expiresAt: expiresAt,
+    });
+    // console.log("working2"); 
+    await user.save();
+
+    const token = generateToken(user._id);
+    user.password = undefined;
+
+    res.status(201).json({
+      message: "Guest login successful",
+      token,
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Guest login failed: " + error.message,
+      error,
     });
   }
 };

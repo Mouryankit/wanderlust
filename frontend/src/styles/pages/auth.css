@@ -115,3 +115,14 @@
   background: transparent;
   color: var(--color-primary);
 }
+
+.auth-form .guest-login-btn {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  margin-top: 0px;
+}
+
+.auth-form .guest-login-btn:hover {
+  background: rgba(229, 65, 65, 0.05); /* 5% opacity of --color-primary */
+}

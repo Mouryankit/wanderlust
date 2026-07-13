@@ -38,3 +38,19 @@
   0%, 100% { opacity: 1; }
   50% { opacity: 0.6; }
 }
+
+@media (max-width: 600px) {
+  .loading-text {
+    font-size: 14px;
+    max-width: 320px;
+    text-align: center;
+    line-height: 1.5;
+    padding: 0 16px;
+    margin-top: 20px;
+  }
+  
+  .spinner {
+    width: 48px;
+    height: 48px;
+  }
+}

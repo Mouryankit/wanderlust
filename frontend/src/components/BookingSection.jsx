@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import API from "../api/axios";
 import { getToken } from "../utils/token";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Bookings from "./Bookings";
@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 
 const BookingSection = ({ listingId, listing, currentUser, isOwner, price, onBookingChange }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [checkIn, setCheckIn] = useState(null);
   const [checkOut, setCheckOut] = useState(null);
@@ -44,7 +45,7 @@ const BookingSection = ({ listingId, listing, currentUser, isOwner, price, onBoo
 
   // ── Step 1: Check if the selected dates are available ──
   const checkAvailability = async () => {
-    if (!getToken()) return navigate("/login");
+    if (!getToken()) return navigate("/login", { state: { from: location.pathname } });
     if (!checkIn || !checkOut || total <= 0) return toast.error("Please select valid dates.");
 
     setLoading(true);

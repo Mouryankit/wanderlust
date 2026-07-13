@@ -19,6 +19,14 @@ const userSchema = new mongoose.Schema(
     googleId: {
       type: String,
     },
+    isGuest: {
+      type: Boolean,
+      default: false,
+    },
+    expiresAt: {
+      type: Date,
+      default: null,
+    },
   },
   { timestamps: true }
 );

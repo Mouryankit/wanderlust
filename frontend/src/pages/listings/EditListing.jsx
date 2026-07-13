@@ -97,6 +97,9 @@ const EditListing = () => {
   return (
     <div className="edit-listing-page">
       <div className="form-card">
+        <button type="button" className="edit-back-btn" onClick={() => navigate(-1)}>
+          &larr; Back
+        </button>
         <h1>Edit Listing</h1>
         <form className="listing-form" onSubmit={handleSubmit}>
           <input className="form-input" type="text" name="title" placeholder="Title" value={formData.title} onChange={handleChange} required />

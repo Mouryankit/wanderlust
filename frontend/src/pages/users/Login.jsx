@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import API from "../../api/axios";
 import { setToken, setUser } from "../../utils/token";
 import toast from "react-hot-toast";
@@ -14,6 +14,7 @@ function Login() {
 
   const googleButtonRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleGoogleResponse = async (response) => {
     if (isSubmitting) return;
@@ -25,7 +26,8 @@ function Login() {
       setToken(res.data.token);
       setUser(res.data.user);
       toast.success("Login Successful!");
-      navigate("/");
+      const from = location.state?.from || "/";
+      navigate(from);
     } catch (error) {
       toast.error(error.response?.data?.message || "Google login failed");
     } finally {
@@ -62,9 +64,27 @@ function Login() {
       setToken(res.data.token);
       setUser(res.data.user);
       toast.success("Login Successful!");
-      navigate("/");
+      const from = location.state?.from || "/";
+      navigate(from);
     } catch (error) {
       toast.error(error.response?.data?.message || "Login failed");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  const handleGuestLogin = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    try {
+      const res = await API.post("/auth/guest");
+      setToken(res.data.token);
+      setUser(res.data.user);
+      toast.success("Welcome, logged in as Demo Recruiter!");
+      const from = location.state?.from || "/";
+      navigate(from);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Guest login failed");
     } finally {
       setIsSubmitting(false);
     }
@@ -105,6 +125,15 @@ function Login() {
 
           <button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Signing in..." : "Login"}
+          </button>
+
+          <button
+            type="button"
+            className="guest-login-btn"
+            onClick={handleGuestLogin}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Signing in..." : "Login as Guest / Recruiter Demo"}
           </button>
 
           <div className="auth-link">

@@ -21,7 +21,7 @@ const Explore = () => {
         if (activeCategory && activeCategory !== "All") {
           searchParams.set("category", activeCategory);
         }
-
+        // console.log(location); 
         const res = await API.get(`/listings?${searchParams.toString()}`);
         setListings(res.data);
       } catch (err) {
